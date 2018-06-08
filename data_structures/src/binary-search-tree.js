@@ -6,14 +6,33 @@ class BinarySearchTree {
   }
 
   depthFirstForEach(cb) {
-    /* Your code here */
-    
-  }
+    // traverse tree
+    const traverse = (node) => {
+        cb(node.value);
+        // move left
+        if(node.left !== null) traverse(node.left);
+        // move right
+        if(node.right !== null) traverse(node.right);
+    };
+    // start at root (PreOrder)
+    traverse(this);
 
-  breadthFirstForEach(cb) {
-    /* Your code here */
+}
 
+breadthFirstForEach(cb) {
+
+  // create queue
+  const queue = [];
+  queue.push(this);
+
+  // is not empty
+  while (queue.length !== 0) {
+      const node = queue.shift();
+      cb(node.value);
+      if(node.left) queue.push(node.left);
+      if(node.right) queue.push(node.right);
   }
+}
 
   insert(value) {
     const newNode = new BinarySearchTree(value);
